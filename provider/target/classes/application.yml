@@ -1,0 +1,13 @@
+server:
+  port: 10010 #Tomcat??
+spring:
+  dubbo:
+    application:
+      name: provider #???
+    registry:
+      address: zookeeper://localhost #zookeeper??
+      port: 2181 #???????
+    protocol:
+      name: dubbo
+      port: 20890 #dubbo???????
+    scan: com.me.provider.service.impl #?????
