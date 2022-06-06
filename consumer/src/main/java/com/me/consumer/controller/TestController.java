@@ -20,7 +20,9 @@ public class TestController {
 
     @GetMapping("/greet")
     public void greet(){
+        //dubbo服务
         myTestService.myTestDubbo();
+        //本地服务
         testService.testDubbo();
     }
 }
