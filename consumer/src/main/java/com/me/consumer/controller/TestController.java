@@ -1,28 +1,26 @@
 package com.me.consumer.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.me.consumer.service.impl.MyTestService;
 import com.me.provider.service.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/test")
 public class TestController {
 
-    @Reference(version = "1.0.1", timeout = 300)
+    @Reference
     private TestService testService;
 
-    @Autowired
-    private MyTestService myTestService;
+    @GetMapping("/printMessage")
+    public void printMessage(@RequestParam("msg") String msg) {
+        testService.method_print_msg(msg);
+    }
 
-    @GetMapping("/greet")
-    public void greet(){
-        //dubbo服务
-        myTestService.myTestDubbo();
-        //本地服务
-        testService.testDubbo();
+    @GetMapping("/sleepForMs")
+    public void sleepForMs(@RequestParam("ms") Long ms) throws Exception {
+        testService.method_sleep(ms);
     }
 }
